@@ -33,10 +33,10 @@ RUN npm install -g @mermaid-js/mermaid-cli
 #
 # Quarto
 #
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.9.37/quarto-1.9.37-linux-arm64.deb \
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.9.37/quarto-1.9.37-linux-amd64.deb \
  && apt-get update \
- && apt-get install -y ./quarto-1.9.37-linux-arm64.deb \
- && rm quarto-1.9.37-linux-arm64.deb
+ && apt-get install -y ./quarto-1.9.37-linux-amd64.deb \
+ && rm quarto-1.9.37-linux-amd64.deb
 
 #
 # Variables para Mermaid
