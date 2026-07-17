@@ -23,17 +23,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && npm install -g @mermaid-js/mermaid-cli \
     && npm cache clean --force
 
-#
-# Mermaid CLI
-#
-RUN npm install -g @mermaid-js/mermaid-cli
-
 # Instala Chrome Headless Shell (recomendado por Quarto)
 RUN quarto install chrome-headless-shell
-
-#
-# Playwright ya instala Chromium.
-#
-ENV PUPPETEER_EXECUTABLE_PATH=/ms-playwright/chromium-*/chrome-linux/chrome
 
 CMD ["bash"]
