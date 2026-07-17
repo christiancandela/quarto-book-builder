@@ -1,14 +1,14 @@
-FROM mcr.microsoft.com/playwright:v1.54.0-jammy
-
+FROM ghcr.io/quarto-dev/quarto:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 #
 # Herramientas adicionales
 #
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     wget \
     git \
+    ca-certificates \
     unzip \
     xz-utils \
     fonts-dejavu \
@@ -16,17 +16,20 @@ RUN apt-get update && apt-get install -y \
     fonts-noto \
  && rm -rf /var/lib/apt/lists/*
 
+ # Instalar Node.js 24 desde NodeSource
+
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g @mermaid-js/mermaid-cli \
+    && npm cache clean --force
+
 #
 # Mermaid CLI
 #
 RUN npm install -g @mermaid-js/mermaid-cli
 
-#
-# Quarto
-#
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.9.37/quarto-1.9.37-linux-amd64.deb \
- && apt-get install -y ./quarto-1.9.37-linux-amd64.deb \
- && rm quarto-1.9.37-linux-amd64.deb
+# Instala Chrome Headless Shell (recomendado por Quarto)
+RUN quarto install chrome-headless-shell
 
 #
 # Playwright ya instala Chromium.
