@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
 # Node LTS
 #
 RUN npm install -g n
-RUN n 20
+RUN n 24
 
 #
 # Mermaid CLI
